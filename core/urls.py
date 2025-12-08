@@ -1,16 +1,14 @@
-from django.urls import path
-from .views import (
-    UnidadeListCreate,
-    SalaListCreate,
-    StatusListCreate,
-    BemListCreate,
-    BemDetail
-)
+from rest_framework.routers import DefaultRouter
+from django.urls import include, path
+from .views import UnidadeViewSet, SalaViewSet, StatusViewSet, BemViewSet, CategoriaViewSet
+
+router = DefaultRouter()
+router.register(r"unidades", UnidadeViewSet)
+router.register(r"salas", SalaViewSet)
+router.register(r"status", StatusViewSet)
+router.register(r"bens", BemViewSet)
+router.register(r"categorias", CategoriaViewSet)
 
 urlpatterns = [
-    path("unidades/", UnidadeListCreate.as_view()),
-    path("salas/", SalaListCreate.as_view()),
-    path("status/", StatusListCreate.as_view()),
-    path("bens/", BemListCreate.as_view()),
-    path("bens/<int:pk>/", BemDetail.as_view()),
+    path("", include(router.urls)),
 ]
