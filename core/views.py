@@ -1,37 +1,34 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
-from rest_framework import generics
-from .models import Unidade, Sala, Status, Bem
-from .serializers import (
-    UnidadeSerializer,
-    SalaSerializer,
-    StatusSerializer,
-    BemSerializer
-)
-def home(request):
-    return HttpResponse("Bem-vindo ao sistema de inventário de bens!")
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .models import Unidade, Sala, Status, Bem, Categoria
+from .serializers import UnidadeSerializer, SalaSerializer, StatusSerializer, BemSerializer, CategoriaSerializer
 
-class UnidadeListCreate(generics.ListCreateAPIView):
+
+class UnidadeViewSet(ModelViewSet):
     queryset = Unidade.objects.all()
     serializer_class = UnidadeSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class SalaListCreate(generics.ListCreateAPIView):
+class SalaViewSet(ModelViewSet):
     queryset = Sala.objects.all()
     serializer_class = SalaSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class StatusListCreate(generics.ListCreateAPIView):
+class StatusViewSet(ModelViewSet):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class BemListCreate(generics.ListCreateAPIView):
+class BemViewSet(ModelViewSet):
     queryset = Bem.objects.all()
     serializer_class = BemSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class BemDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Bem.objects.all()
-    serializer_class = BemSerializer
+class CategoriaViewSet(ModelViewSet):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
