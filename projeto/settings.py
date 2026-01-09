@@ -15,6 +15,13 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -31,6 +38,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,9 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -126,9 +134,57 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_PERMISSION_CLASSES": [
+"rest_framework.permissions.AllowAny"
+],
+"DEFAULT_AUTHENTICATION_CLASSES": [
+"rest_framework.authentication.SessionAuthentication",
+"rest_framework.authentication.BasicAuthentication",
+],
+"DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 SPECTACULAR_SETTINGS = {
     'TITLE': 'PATRI-TECH API',
-    'DESCRIPTION': 'Documentação da API de inventário de bens',
+    'DESCRIPTION': 'API do sistema de inventário patrimonial',
     'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
+JAZZMIN_SETTINGS = {
+
+    #logo tela admin
+    "login_logo": "images/logo.png",
+    
+
+    #logo proximo nome patri_tec
+    "site_logo": "images/logo.png",
+
+
+ # title of the window (Will default to current_admin_site.site_title if absent or None)
+    'site_title': 'PATRI-TECH',
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    'site_header': 'PATRI-TECH',
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    'site_brand': 'PATRI-TECH',
+
+    #'icons': {
+    #'projeto.bem':'fa-solid fa-box-archive',
+
+    #},
+
+    # Welcome text on the login screen
+    'welcome_sign': 'Bem-vindo(a) ao PATRI-TECH',
+
+    # Copyright on the footer
+    'copyright': 'Luciano saints',
+
+    # List of model admins to search from the search bar, search bar omitted if excluded
+    # If you want to use a single search field you dont need to use a list, you can use a simple string 
+    #'search_model': ['core.Bem'],
+
+    # Whether to show the UI customizer on the sidebar
+    #'show_ui_builder': True, 
+    
+}
+
